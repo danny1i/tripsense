@@ -1,0 +1,45 @@
+.pref-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pref-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 4px 6px 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  animation: fade-up 240ms var(--ease) both;
+}
+
+.pref-chip:not(:has(button)) {
+  padding-right: 14px;
+}
+
+.pref-chip__icon {
+  flex: none;
+}
+
+.pref-chip__remove {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--brand-strong);
+}
+
+.pref-chip__remove:hover:not([disabled]) {
+  background: rgba(9, 82, 79, 0.12);
+}

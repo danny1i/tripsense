@@ -1,0 +1,97 @@
+.filter-panel {
+  padding: 18px;
+  display: grid;
+  gap: 18px;
+  animation: fade-up 240ms var(--ease) both;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.filter-field {
+  display: grid;
+  gap: 6px;
+}
+
+.filter-field label,
+.filter-types legend {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.filter-field select {
+  min-height: 44px;
+  padding: 8px 36px 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%235d6874'%3E%3Cpath d='m6.4 8.6 5.6 5.6 5.6-5.6L19 10l-7 7-7-7z'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  appearance: none;
+}
+
+.filter-field select:hover {
+  border-color: var(--ink-muted);
+}
+
+.filter-types {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.filter-types legend {
+  margin-bottom: 8px;
+}
+
+.filter-types__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.check-chip {
+  position: relative;
+  display: inline-flex;
+}
+
+.check-chip input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.check-chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.check-chip input:checked + span {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.check-chip input:focus-visible + span {
+  box-shadow: var(--focus);
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

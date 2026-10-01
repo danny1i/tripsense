@@ -1,0 +1,64 @@
+# ILLUSTRATIVE — NOT DEPLOYED.
+# TripSense production design: PostgreSQL on Amazon RDS (schema in db/schema.sql).
+AWSTemplateFormatVersion: '2010-09-09'
+Description: TripSense database — Multi-AZ RDS PostgreSQL with a Secrets Manager-managed password (illustrative).
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: tripsense-prod
+  InstanceClass:
+    Type: String
+    Default: db.t4g.medium
+  AppSecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: Security group of the BFF / search service tasks allowed to connect.
+
+Resources:
+  DbSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Private subnets for TripSense database
+      SubnetIds: !Split [',', !ImportValue { 'Fn::Sub': '${EnvironmentName}-PrivateSubnetIds' }]
+
+  DbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: PostgreSQL access from application tasks only
+      VpcId: !ImportValue { 'Fn::Sub': '${EnvironmentName}-VpcId' }
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId: !Ref AppSecurityGroupId
+
+  Database:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Snapshot
+    UpdateReplacePolicy: Snapshot
+    Properties:
+      Engine: postgres
+      EngineVersion: '17.5'
+      DBInstanceClass: !Ref InstanceClass
+      DBName: tripsense
+      MasterUsername: tripsense_admin
+      ManageMasterUserPassword: true # password generated and rotated in Secrets Manager
+      AllocatedStorage: '50'
+      MaxAllocatedStorage: 200
+      StorageType: gp3
+      StorageEncrypted: true
+      MultiAZ: true
+      PubliclyAccessible: false
+      DBSubnetGroupName: !Ref DbSubnetGroup
+      VPCSecurityGroups: [!Ref DbSecurityGroup]
+      BackupRetentionPeriod: 7
+      DeletionProtection: true
+      EnablePerformanceInsights: true
+      EnableCloudwatchLogsExports: [postgresql]
+      AutoMinorVersionUpgrade: true
+
+Outputs:
+  DatabaseEndpoint:
+    Value: !GetAtt Database.Endpoint.Address
+  DatabaseSecretArn:
+    Value: !GetAtt Database.MasterUserSecret.SecretArn

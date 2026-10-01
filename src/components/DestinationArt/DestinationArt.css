@@ -1,0 +1,10 @@
+.destination-art {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.destination-art--hero {
+  min-height: 260px;
+}

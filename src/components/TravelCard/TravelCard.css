@@ -1,0 +1,169 @@
+.travel-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+  animation: fade-up 360ms var(--ease) both;
+}
+
+.travel-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.travel-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--surface-muted);
+}
+
+.travel-card__score,
+.travel-card__highlight {
+  position: absolute;
+  top: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.travel-card__score {
+  right: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--brand-strong);
+}
+
+.travel-card__highlight {
+  left: 12px;
+  background: var(--ink);
+  color: #fff;
+}
+
+.travel-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  flex: 1;
+}
+
+.travel-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.travel-card__title {
+  font-size: 1.5rem;
+}
+
+.travel-card__meta {
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+  margin-top: 2px;
+}
+
+.travel-card__price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.travel-card__amount {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.travel-card__pp {
+  margin-left: 2px;
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.travel-card__duration {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.travel-card__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.travel-card__facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.travel-card__facts svg {
+  color: var(--sun);
+}
+
+.travel-card__reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.9375rem;
+}
+
+.travel-card__reasons li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.travel-card__reasons svg {
+  color: var(--success);
+  margin-top: 4px;
+  flex: none;
+}
+
+.travel-card__why {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  background: var(--surface-muted);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.travel-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.travel-card__tags li {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--sun-soft);
+  color: var(--sun);
+}
+
+.travel-card__cta {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.travel-card--compact .travel-card__title {
+  font-size: 1.25rem;
+}
